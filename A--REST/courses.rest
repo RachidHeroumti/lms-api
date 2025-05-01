@@ -1,24 +1,8 @@
 @url=http://localhost:8000/api
 @token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDYxMDMxNjQsImV4cCI6MTc0NjEwNjc2NCwibmJmIjoxNzQ2MTAzMTY0LCJqdGkiOiJkY3E0Q0E0c1B2bG1XY3V0Iiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.z7DOecWYJbPjE4JZbB84HDMyXQaCQu_L4WH_1fZuAu4
 
-### Register
-POST {{url}}/auth/sign-up HTTP/1.1
+
+### get All courses
+GET {{url}}/courses/find HTTP/1.1
 Content-Type: application/json
 Accept: application/json
-
-{
-  "name": "admin",
-  "email": "admin@gmail.com",
-  "password": "test12345",
-  "role":"admin"
-  }
-
-### Login
-POST {{url}}/auth/login HTTP/1.1
-Content-Type: application/json
-Accept: application/json
-
-{
-  "email": "admin@gmail.com",
-  "password": "test12345"
-}

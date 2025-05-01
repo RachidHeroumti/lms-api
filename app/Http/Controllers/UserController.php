@@ -61,8 +61,6 @@ class UserController extends Controller
         ]);
     }
     
-
-
     public function GetUsers(Request $request)
     {
         $users = User::all();
@@ -86,19 +84,19 @@ class UserController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-    $user = User::find($id);
+     $user = User::find($id);
 
-    if (!$user) {
+     if (!$user) {
         return response()->json([
             'message' => 'User not found'
         ], 404);
     }
 
-    $request->validate([
+      $request->validate([
         'name' => 'string|max:255',
         'email' => 'email|unique:users,email,' . $id,
         'phone' => 'nullable|string|max:20',
-    ]);
+     ]);
 
     // Update fields
     $user->update($request->all());
