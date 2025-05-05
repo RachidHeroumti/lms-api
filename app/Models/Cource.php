@@ -34,4 +34,8 @@ class Cource extends Model
     {
         return $this->belongsToMany(User::class, 'subscribes', 'cource_id', 'student_id')->withTimestamps();
     }
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class);
+    }
 }

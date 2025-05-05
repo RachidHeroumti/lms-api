@@ -1,0 +1,60 @@
+@url = http://localhost:8000/api/quizzes
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+
+### Get all quizzes
+GET {{url}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+### Get one quiz
+GET {{url}}/1
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+### Create a new quiz
+POST {{url}}
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "What is the capital of France?",
+  "description": "Geography quiz",
+  "option_1": "Paris",
+  "option_2": "London",
+  "option_3": "Berlin",
+  "option_4": "Madrid",
+  "option_5": "Rome",
+  "correct_option": 1,
+  "cource_id":1
+}
+
+###
+
+### Update an existing quiz
+PUT {{url}}/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "Updated question",
+  "description": "Updated description",
+  "option_1": "Updated A",
+  "option_2": "Updated B",
+  "option_3": "Updated C",
+  "option_4": "Updated D",
+  "option_5": "Updated E",
+  "correct_option": 2
+}
+
+###
+
+### Delete a quiz
+DELETE {{url}}/1
+Accept: application/json
+Authorization: Bearer {{token}}
