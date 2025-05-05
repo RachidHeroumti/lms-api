@@ -4,51 +4,91 @@ namespace App\Http\Controllers;
 
 use App\Models\Cource;
 use Illuminate\Http\Request;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Str;
+use Cloudinary\Cloudinary; 
+use Illuminate\Support\Facades\Log;
 
 class CourceController extends Controller
 {
-    
+  
     public function addCource(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'instructor' => 'required|string',
-            'category' => 'required|string',
-            'video' => 'nullable|file|mimes:mp4,mov,avi|max:51200',//50mb
-            'pdf' => 'nullable|file|mimes:pdf|max:20480',//20mb
-        ]);
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'category' => 'required|string',
+        'instructor_id' => 'required|exists:users,id',
+        'videos.*' => 'nullable|file|mimes:mp4,mov,avi|max:51200', // max:50MB
+        'pdfs.*' => 'nullable|file|mimes:pdf|max:20480', // max:20MB
+    ]);
 
-        $videoUrl = $request->hasFile('video')
-            ? Cloudinary::upload($request->file('video')->getRealPath(), ['resource_type' => 'video'])->getSecurePath()
-            : null;
+    $videoUrls = [];
+    $videos = $request->file('videos');
 
-        $pdfUrl = $request->hasFile('pdf')
-            ? Cloudinary::upload($request->file('pdf')->getRealPath(), ['resource_type' => 'raw'])->getSecurePath()
-            : null;
+    if ($videos) {
+        $videos = is_array($videos) ? $videos : [$videos];
 
-        $cource = Cource::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'instructor' => $request->instructor,
-            'category' => $request->category,
-            'video_url' => $videoUrl,
-            'pdf_url' => $pdfUrl,
-        ]);
+        foreach ($videos as $video) {
+            $realPath = $video->getRealPath();
+            Log::info("Uploading video from path: {$realPath}");
 
-        return response()->json(['message' => 'Cource created successfully', 'cource' => $cource], 201);
+            $cloudinary = new Cloudinary();
+            $uploadResult = $cloudinary->uploadApi()->upload($realPath, [
+                'resource_type' => 'video'
+            ]);
+
+            $videoUrls[] = $uploadResult['secure_url'];
+        }
     }
 
-    public function getInstructoreCources(Request $request)
+    $pdfUrls = [];
+    $pdfs = $request->file('pdfs');
+
+    if ($pdfs) {
+        $pdfs = is_array($pdfs) ? $pdfs : [$pdfs];
+
+        foreach ($pdfs as $pdf) {
+            $realPath = $pdf->getRealPath();
+            Log::info("Uploading PDF from path: {$realPath}");
+            $cloudinary = new Cloudinary();
+            $uploadResult = $cloudinary->uploadApi()->upload($realPath, [
+                'resource_type' => 'raw'
+            ]);
+
+
+            $pdfUrls[] = $uploadResult['secure_url'];
+        }
+    }
+
+    $course = Cource::create([
+        'title' => $request->title,
+        'description' => $request->description,
+        'slug' => Str::slug($request->title) . '-' . uniqid(),
+        'category' => $request->category,
+        'instructor_id' => $request->instructor_id,
+        'videos' => $videoUrls,
+        'pdfs' => $pdfUrls,
+    ]);
+
+    return response()->json([
+        'message' => 'Course created successfully',
+        'course' => $course,
+    ], 201);
+}
+
+
+    
+    
+
+    public function getInstructorCourses(Request $request)
     {
         $request->validate([
-            'instructor' => 'required|string'
+            'instructor_id' => 'required|exists:users,id',
         ]);
 
-        $cources = Cource::where('instructor', $request->user)->get();
+        $courses = Cource::where('instructor_id', $request->instructor_id)->get();
 
-        return response()->json(['cources' => $cources]);
+        return response()->json(['courses' => $courses]);
     }
 
     public function getCource(Request $request)
@@ -57,13 +97,14 @@ class CourceController extends Controller
             'id' => 'required|integer|exists:cources,id'
         ]);
 
-        $cource = Cource::findOrFail($request->id);
+        $course = Cource::findOrFail($request->id);
 
-        return response()->json(['cource' => $cource]);
+        return response()->json(['course' => $course]);
     }
-    public function getAllCources(Request $request){
 
+    public function getAllCources()
+    {
         $courses = Cource::all();
-        return response()->json(["coucres" => $courses]);
+        return response()->json(['courses' => $courses]);
     }
 }

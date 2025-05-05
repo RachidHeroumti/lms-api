@@ -1,8 +1,44 @@
-@url=http://localhost:8000/api
-@token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDYxMDMxNjQsImV4cCI6MTc0NjEwNjc2NCwibmJmIjoxNzQ2MTAzMTY0LCJqdGkiOiJkY3E0Q0E0c1B2bG1XY3V0Iiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.z7DOecWYJbPjE4JZbB84HDMyXQaCQu_L4WH_1fZuAu4
+@url = http://localhost:8000/api
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
 
+###
 
-### get All courses
-GET {{url}}/courses/find HTTP/1.1
-Content-Type: application/json
+### ➕ Create Course
+POST {{url}}/courses/create
+Content-Type: multipart/form-data
+Accept: application/json
+
+{
+    "title":"title",
+    "description":"description",
+    "category":"category",
+    "instructor_id":"instructor id"
+}
+### Example for Postman or REST Client with file support:
+# title: Laravel Basics
+# description: Learn Laravel from scratch
+# category: Backend
+# instructor_id: 1
+# pdfs: (file)
+# videos: (file)
+
+###
+
+### 📦 Get All Courses
+GET {{url}}/courses/find
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 🔍 Get Course by ID
+GET {{url}}/courses/1
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### 👨‍🏫 Get Courses by Instructor
+GET {{url}}/courses/instructor?instructor_id=1
+Authorization: Bearer {{token}}
 Accept: application/json

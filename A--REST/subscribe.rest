@@ -1,0 +1,25 @@
+@url = http://localhost:8000/api/subscribe
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+
+###
+
+### 
+POST {{url}} 
+Content-Type: application/json
+Accept: application/json
+
+{
+    "student_id":2,
+    "cource_id":8,
+    "price":100
+}
+
+###/student/{studentId}/courses
+GET {{url}}/student/2/courses
+Content-Type: application/json
+Accept: application/json
+
+###/course/{courseId}/students
+GET {{url}}/course/1/students
+Content-Type: application/json
+Accept: application/json

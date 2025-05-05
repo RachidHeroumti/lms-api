@@ -7,10 +7,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "admin",
-  "email": "admin@gmail.com",
+  "name": "student",
+  "email": "student@gmail.com",
   "password": "test12345",
-  "role":"admin"
+  "role":"student"
   }
 
 ### Login

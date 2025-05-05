@@ -6,25 +6,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cource extends Model
 {
-    // Specify the table name if it's not plural 'cources'
     protected $table = 'cources';
 
-    // Define which fields are mass assignable
     protected $fillable = [
         'title',
         'description',
-        'instructor',
+        'slug',
+        'instructor_id',
         'category',
-        'video_url',
-        'pdf_url',
+        'videos',
+        'pdfs',
     ];
 
-    // Optionally define relationships (e.g., with a User model for instructors)
-    // If you have an 'instructor' as a reference to a User model
-    // public function instructor()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
 
-    // If you want to retrieve files like video_url and pdf_url, they are just attributes here.
+    protected $casts = [
+        'videos' => 'array',
+        'pdfs' => 'array',
+    ];
+
+
+    public function instructor()
+    {
+        return $this->belongsTo(User::class, 'instructor_id');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'subscribes', 'cource_id', 'student_id')->withTimestamps();
+    }
 }

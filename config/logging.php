@@ -95,8 +95,8 @@ return [
         ],
 
         'stderr' => [
-            'driver' => 'monolog',
-            'level' => env('LOG_LEVEL', 'debug'),
+            'driver' => 'stderr',
+        'level' => 'debug',
             'handler' => StreamHandler::class,
             'handler_with' => [
                 'stream' => 'php://stderr',

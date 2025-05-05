@@ -47,27 +47,36 @@ class User extends Authenticatable   implements JWTSubject
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            ];
-        }
-    
-        /**
-         * Get the identifier that will be stored in the subject claim of the JWT.
-         *
-         * @return mixed
-         */
-        public function getJWTIdentifier()
-        {
-            return $this->getKey(); // usually the user's ID
-        }
-    
-        /**
-         * Return a key-value array, containing any custom claims to be added to the JWT.
-         *
-         * @return array
-         */
-        public function getJWTCustomClaims(): array
-        {
-            return [];
-        }
+        ];
     }
 
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey(); // usually the user's ID
+    }
+
+    /**
+     * Return a key-value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims(): array
+    {
+        return [];
+    }
+
+    public function cources()
+    {
+        return $this->hasMany(Cource::class, 'instructor_id');
+    }
+
+    public function subscribedCources()
+    {
+        return $this->belongsToMany(Cource::class, 'subscribes', 'student_id', 'cource_id')->withTimestamps();
+    }
+}
