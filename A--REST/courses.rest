@@ -1,5 +1,5 @@
 @url = http://localhost:8000/api
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+@token =eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDY1MjY5MzYsImV4cCI6MTc0NjUzMDUzNiwibmJmIjoxNzQ2NTI2OTM2LCJqdGkiOiI3UER6MVdyMzFSODkzT2NUIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.2FIp4kjLMy8fB-tAeuw24YzEEHAvkVHeDEnCFNJn2Cw
 
 ###
 
@@ -7,6 +7,7 @@
 POST {{url}}/courses/create
 Content-Type: multipart/form-data
 Accept: application/json
+Authorization: Bearer {{token}}
 
 {
     "title":"title",
@@ -42,3 +43,4 @@ Accept: application/json
 GET {{url}}/courses/instructor?instructor_id=1
 Authorization: Bearer {{token}}
 Accept: application/json
+Authorization: Bearer {{token}}

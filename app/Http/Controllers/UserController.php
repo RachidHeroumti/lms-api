@@ -107,22 +107,6 @@ class UserController extends Controller
     ]);
    }
 
-   public function getUserServices($id)
-   {
-       $user = User::find($id);
-
-       if (!$user) {
-           return response()->json([
-               'error' => 'User not found'
-           ], 404);
-       }
-
-       $services = $user->services;
-
-       return response()->json([
-           'user' => $user,
-           'services' => $services
-       ]);
-   }
+   
     
 }

@@ -1,6 +1,5 @@
 @url = http://localhost:8000/api/quizzes
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
-
+@token =eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDY1Mjc2NTAsImV4cCI6MTc0NjUzMTI1MCwibmJmIjoxNzQ2NTI3NjUwLCJqdGkiOiJMQ00xTkU2N3NuZXdhT2tvIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.SsEMWFwzz4DQlcalPhLrdDpWwCCRfrsAve31KhF4zDM
 ### Get all quizzes
 GET {{url}}
 Accept: application/json
@@ -14,6 +13,7 @@ Accept: application/json
 Authorization: Bearer {{token}}
 
 ###
+
 
 ### Create a new quiz
 POST {{url}}
@@ -33,8 +33,6 @@ Authorization: Bearer {{token}}
   "cource_id":1
 }
 
-###
-
 ### Update an existing quiz
 PUT {{url}}/1
 Content-Type: application/json
@@ -52,7 +50,6 @@ Authorization: Bearer {{token}}
   "correct_option": 2
 }
 
-###
 
 ### Delete a quiz
 DELETE {{url}}/1
