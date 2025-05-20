@@ -1,0 +1,33 @@
+envVars:
+  - key: APP_ENV
+    value: production
+  - key: APP_KEY
+    value: base64:2PFc+xXBNjUw0qm8XJNxskqFID6OgGBlqt7T/kq0Ldw=
+  - key: APP_URL
+    value: https://your-laravel-app.onrender.com
+  - key: DB_CONNECTION
+    value: mysql
+  - key: DB_HOST
+    value: b9tyx3gk2sagt2uvvnbr-mysql.services.clever-cloud.com
+  - key: DB_PORT
+    value: 3306
+  - key: DB_DATABASE
+    value: b9tyx3gk2sagt2uvvnbr
+  - key: DB_USERNAME
+    value: u8lvrckbowzyfnwi
+  - key: DB_PASSWORD
+    value: r7oumoxx128NfRMdVb3Y
+  - key: CLOUDINARY_CLOUD_NAME
+    value: dvurjw1nd
+  - key: CLOUDINARY_KEY
+    value: 739495426827519
+  - key: CLOUDINARY_SECRET
+    value: 7YFfgAxtZQ1M1I1ZuiB1EMjKmKk
+  - key: CLOUDINARY_URL
+    value: cloudinary://739495426827519:7YFfgAxtZQ1M1I1ZuiB1EMjKmKk@dvurjw1nd
+  - key: STRIPE_KEY
+    value: pk_test_...
+  - key: STRIPE_SECRET
+    value: sk_test_...
+  - key: JWT_SECRET
+    value: G0y2YLpdWpY385cL2sbnixOHVoBzgD5QUvSxAE6lc2Xm0igtCW4Dwra4jTUVypZt
