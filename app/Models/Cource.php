@@ -18,13 +18,10 @@ class Cource extends Model
         'pdfs',
     ];
 
-
     protected $casts = [
         'videos' => 'array',
         'pdfs' => 'array',
     ];
-
-
     public function instructor()
     {
         return $this->belongsTo(User::class, 'instructor_id');
