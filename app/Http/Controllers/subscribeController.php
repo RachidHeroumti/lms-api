@@ -13,24 +13,23 @@ class SubscribeController extends Controller
 
         $validated = $request->validate([
             'cource_id' => 'required|integer|exists:cources,id',
-            'student_id' => 'required|integer|exists:users,id',
             'price' => 'required|numeric', 
         ]);
     
         $existingSubscription = Subscribe::where('cource_id', $validated['cource_id'])
-                                          ->where('student_id', $validated['student_id'])
+                                          ->where('student_id',$request->user()->id)
                                           ->first();
     
         if ($existingSubscription) {
             return response()->json([
                 'message' => 'You are already subscribed to this course.',
-            ], 400); 
+            ], 200); 
         }
     
         
         $subscription = Subscribe::create([
             'cource_id' => $validated['cource_id'],
-            'student_id' => $validated['student_id'],
+            'student_id' => $request->user()->id, 
             'price' => $validated['price'],
         ]);
     

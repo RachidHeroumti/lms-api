@@ -1,5 +1,7 @@
 @url = http://localhost:8000/api
-@token =eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDY1MjY5MzYsImV4cCI6MTc0NjUzMDUzNiwibmJmIjoxNzQ2NTI2OTM2LCJqdGkiOiI3UER6MVdyMzFSODkzT2NUIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.2FIp4kjLMy8fB-tAeuw24YzEEHAvkVHeDEnCFNJn2Cw
+@token =eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDg2MzY5MTUsImV4cCI6MTc1MTIyODkxNSwibmJmIjoxNzQ4NjM2OTE1LCJqdGkiOiJNc25GaDYxWGg1SlBTMmduIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0cCYCS6qaAnHKeyy68961a7pl_Hj62LSijpJnQUGy_0
+
+
 
 ###
 
@@ -33,7 +35,7 @@ Accept: application/json
 ###
 
 ### 🔍 Get Course by ID
-GET {{url}}/courses/1
+GET {{url}}/courses/find/1
 Authorization: Bearer {{token}}
 Accept: application/json
 

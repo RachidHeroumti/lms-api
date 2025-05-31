@@ -1,0 +1,51 @@
+@url = http://localhost:8000/api/reviews/find
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDg2MzY5MTUsImV4cCI6MTc1MTIyODkxNSwibmJmIjoxNzQ4NjM2OTE1LCJqdGkiOiJNc25GaDYxWGg1SlBTMmduIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0cCYCS6qaAnHKeyy68961a7pl_Hj62LSijpJnQUGy_0
+
+
+### Get all reviews
+GET {{url}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+### Create a review
+POST {{url}}
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "course_id": 1,
+  "content": "This is a great course!",
+  "rating": 5
+}
+
+
+### Get one review by ID
+GET {{url}}/1
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+### Get reviews by course ID
+GET {{url}}/course/1
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+### Update a review by ID
+PUT {{url}}/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+  "content": "Updated review content.",
+  "rating": 4
+}
+
+
+### Delete a review by ID
+DELETE {{url}}/1
+Accept: application/json
+Authorization: Bearer {{token}}

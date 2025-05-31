@@ -1,17 +1,16 @@
 @url = http://localhost:8000/api/subscribe
-@token =eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDY1NDYwMjgsImV4cCI6MTc0NjU0OTYyOCwibmJmIjoxNzQ2NTQ2MDI4LCJqdGkiOiJPV3RwVHNoc3BmUUlOVjg5Iiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.d_c7E3Wq8Hl08BOSSOd3V6j1HpOkeMEVIG5nrfu5HCA
-###
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDg2MzY5MTUsImV4cCI6MTc1MTIyODkxNSwibmJmIjoxNzQ4NjM2OTE1LCJqdGkiOiJNc25GaDYxWGg1SlBTMmduIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0cCYCS6qaAnHKeyy68961a7pl_Hj62LSijpJnQUGy_0
+
 
 ### 
-POST {{url}}/checkout
+POST {{url}}/
 Content-Type: application/json
 Accept: application/json
 Authorization: Bearer {{token}}
 
 {
-    "student_id":2,
-    "cource_id":8,
-    "amount":100
+    "cource_id":1,
+    "price":66
 }
 
 ###/student/{studentId}/courses

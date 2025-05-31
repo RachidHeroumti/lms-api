@@ -64,4 +64,11 @@ class QuizController extends Controller
 
         return response()->json(['message' => 'Quiz deleted']);
     }
+
+ public function getQuizByCource($id)
+{
+    $quizzes = Quiz::where('cource_id', $id)->get();
+    return response()->json(['quizzes' => $quizzes]);
+}
+
 }

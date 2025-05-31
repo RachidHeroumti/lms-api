@@ -1,5 +1,5 @@
 @url=http://localhost:8000/api
-@token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDY1MjY1OTMsImV4cCI6MTc0NjUzMDE5MywibmJmIjoxNzQ2NTI2NTkzLCJqdGkiOiJIdlZkVVFyZlNwSnJXRUwwIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.LU8K26hzrudj0MeRYfoAEf130cODvw9L9nC-VL43alM
+@token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NDg2MDU2ODMsImV4cCI6MTc0ODYwOTI4MywibmJmIjoxNzQ4NjA1NjgzLCJqdGkiOiI3czl2YUFGQlNqcnRBSmlkIiwic3ViIjoiNCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.PQuAFqTIA0j3pIukV6-fmhl1Am1kF9CgE35yXQbMNEQ
 
 ### Register
 POST {{url}}/auth/sign-up HTTP/1.1
@@ -7,10 +7,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "instructor",
-  "email": "instructor@gmail.com",
+  "name": "std std",
+  "email": "std@gmail.com",
   "password": "test12345",
-  "role":"instructor"
+  "role":"student"
   }
 
 ### Login
@@ -19,7 +19,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "email": "student@gmail.com",
+  "email": "admin@gmail.com",
   "password": "test12345"
 }
 

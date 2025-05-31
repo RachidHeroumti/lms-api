@@ -8,15 +8,30 @@ class Cource extends Model
 {
     protected $table = 'cources';
 
-    protected $fillable = [
-        'title',
-        'description',
-        'slug',
-        'instructor_id',
-        'category',
-        'videos',
-        'pdfs',
-    ];
+protected $fillable = [
+    'title',
+    'subtitle',
+    'description',
+    'slug',
+    'instructor_id',
+    'category',
+    'videos',
+    'pdfs',
+    'thumbnail',
+    'duration',
+    'price',
+    'old_price',
+    'language',
+    'level',
+    'is_free',
+    'status',
+    'details',
+    'requirements',
+    'outcomes',
+    'tags',
+    'published_at',
+    'is_featured',
+];
 
     protected $casts = [
         'videos' => 'array',
