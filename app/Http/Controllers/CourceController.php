@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Cloudinary\Cloudinary;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Validator;
+use App\Models\User ;
 class CourceController extends Controller
 {
     private $cloudinary;
@@ -111,17 +112,39 @@ class CourceController extends Controller
 
 
 
-    public function getInstructorCourses(Request $request)
-    {
-        $request->validate([
-            'instructor_id' => 'required|exists:users,id',
-        ]);
+  public function getInstructorCourses(Request $request, $id)
+{
+    $validator = Validator::make(['id' => $id], [
+        'id' => 'required|integer|exists:users,id',
+    ]);
 
-        $courses = Cource::where('instructor_id', $request->instructor_id)->get();
-
-        return response()->json(['courses' => $courses]);
+    if ($validator->fails()) {
+        return response()->json([
+            'message' => 'Invalid instructor ID.',
+            'errors' => $validator->errors(),
+        ], 422);
     }
 
+    $instructor = User::find($id);
+    if ($instructor->role !== 'instructor'&&$instructor->role !== 'admin') {
+        return response()->json([
+            'message' => 'User is not an instructor.',
+        ], 403);
+    }
+
+    try {
+        $courses = Cource::where('instructor_id', $id)->get();
+
+        return response()->json([
+            'courses' => $courses,
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Failed to retrieve courses.',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+}
     public function getCource( $id)
     {
         $course = Cource::findOrFail($id);

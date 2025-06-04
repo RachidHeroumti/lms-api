@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cource;
 use App\Models\Subscribe;
 use Illuminate\Http\Request;
 
@@ -44,13 +45,75 @@ class SubscribeController extends Controller
     {
         $subscriptions = Subscribe::with('cource')->where('student_id', $studentId)->get();
 
-        return response()->json($subscriptions);
+        return response()->json(['subscriptions'=>$subscriptions]);
     }
 
     public function getCourseSubscribers($courceId)
     {
-        $subscriptions = Subscribe::with('student')->where('cource_id', $courceId)->get();
+      $subscriptions = Subscribe::with(['student', 'cource'])
+    ->where('cource_id', $courceId)
+    ->get();
 
-        return response()->json($subscriptions);
+        return response()->json([ 'subscriptions' => $subscriptions]);
     }
+
+public function getAnalytics($courceId) 
+{
+    $course = Cource::withCount(['subscriptions' => function ($query) {
+        $query->where('accepted', true);
+    }])->find($courceId);
+
+    if (!$course) {
+        return response()->json(['message' => 'Course not found'], 404);
+    }
+
+    return response()->json([
+        'analytics' => [
+            'id' => $course->id,
+            'courseId' => $course->id,
+            'title' => $course->title,
+            'studentsSubscribed' => $course->subscriptions_count, 
+        ]
+    ]);
+}
+
+
+public function PendingOrder()
+{
+    $ordersPending = Subscribe::with(['student', 'cource'])
+        ->where('accepted', false)
+        ->get();
+
+    return response()->json(['orderPending' => $ordersPending]);
+}
+
+public function acceptPendingOrder($subscriptionId)
+{
+    $subscription = Subscribe::where('id', $subscriptionId)
+        ->where('accepted', false)
+        ->first();
+    if (!$subscription) {
+        return response()->json(['message' => 'Subscription not found or already accepted'], 404);
+    }
+    $subscription->accepted = true;
+    $subscription->save();
+    return response()->json(['message' => 'Subscription accepted successfully', 'subscription' => $subscription]);
+}
+
+public function deleteSubscription($id)
+{
+    $subscription = Subscribe::find($id);
+
+    if (!$subscription) {
+        return response()->json(['message' => 'Subscription not found'], 200);
+    }
+
+    $subscription->delete();
+
+    return response()->json(['message' => 'Subscription deleted successfully']);
+}
+
+
+
+
 }

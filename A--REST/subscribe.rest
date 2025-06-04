@@ -24,3 +24,9 @@ GET {{url}}/course/1/students
 Content-Type: application/json
 Accept: application/json
 Authorization: Bearer {{token}}
+
+###/course/{courseId}/students
+GET {{url}}/analytics/1/students
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}

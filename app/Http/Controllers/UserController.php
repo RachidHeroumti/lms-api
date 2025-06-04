@@ -79,8 +79,19 @@ class UserController extends Controller
             ], 404);
         }
     
-        return response()->json($user);
+        return response()->json(['user'=>$user]);
     }
+    
+
+    public function getMe(Request $request){
+    $user = $request->user(); 
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
+    }
+    return response()->json(['user' => $user]);
+}
+
+
 
     public function updateUser(Request $request, $id)
     {

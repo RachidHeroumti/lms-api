@@ -42,7 +42,7 @@ Accept: application/json
 ###
 
 ### 👨‍🏫 Get Courses by Instructor
-GET {{url}}/courses/instructor?instructor_id=1
+GET {{url}}/courses/find/instructor/1
 Authorization: Bearer {{token}}
 Accept: application/json
 Authorization: Bearer {{token}}

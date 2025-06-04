@@ -50,4 +50,9 @@ protected $fillable = [
     {
         return $this->hasMany(Quiz::class);
     }
+    public function subscriptions()
+{
+    return $this->hasMany(Subscribe::class, 'cource_id');
+}
+
 }
