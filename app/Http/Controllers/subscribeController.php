@@ -43,7 +43,8 @@ class SubscribeController extends Controller
 
     public function getStudentCourses($studentId)
     {
-        $subscriptions = Subscribe::with('cource')->where('student_id', $studentId)->get();
+        $subscriptions = Subscribe::with('cource')->where('student_id', $studentId)->
+        where('accepted',true)->get();
 
         return response()->json(['subscriptions'=>$subscriptions]);
     }

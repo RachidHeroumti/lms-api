@@ -17,7 +17,8 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
-            'role' => 'required|in:instructor,student,admin',
+            'role' => 'required|in:instructor,student',
+            'phone' => 'nullable|string|max:20'
              
         ]);
     
@@ -26,7 +27,8 @@ class UserController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
-            'active'=>false
+            'active'=>false,
+            'phone'=>$data['phone']
            ]);
     
 
@@ -87,32 +89,31 @@ class UserController extends Controller
     $user = $request->user(); 
     if (!$user) {
         return response()->json(['message' => 'User not found'], 404);
-    }
+     }
     return response()->json(['user' => $user]);
 }
 
 
 
-    public function updateUser(Request $request, $id)
-    {
+    public function updateUser(Request $request, $id){
      $user = User::find($id);
 
      if (!$user) {
         return response()->json([
             'message' => 'User not found'
         ], 404);
-    }
+     }
 
       $request->validate([
         'name' => 'string|max:255',
         'email' => 'email|unique:users,email,' . $id,
         'phone' => 'nullable|string|max:20',
-     ]);
+      ]);
 
     // Update fields
-    $user->update($request->all());
+     $user->update($request->all());
 
-    return response()->json([
+     return response()->json([
         'message' => 'User updated successfully',
         'user' => $user
     ]);

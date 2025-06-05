@@ -24,7 +24,6 @@ class CourceController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'category' => 'required|string',
-            'instructor_id' => 'required|exists:users,id',
             'videos.*' => 'nullable|file|mimes:mp4,mov,avi|max:51200',
             'pdfs.*' => 'nullable|file|mimes:pdf|max:20480',
             'thumbnail' => 'file|image',
@@ -85,7 +84,7 @@ class CourceController extends Controller
         'description' => $request->description,
         'slug' => $request->slug ?? Str::slug($request->title) . '-' . uniqid(),
         'category' => $request->category,
-        'instructor_id' => $request->instructor_id,
+        'instructor_id' => $request->user()->id,
         'videos' => json_encode($videoUrls),
         'pdfs' => json_encode($pdfUrls),
         'thumbnail' => $thumbnailUrl,
@@ -138,6 +137,7 @@ class CourceController extends Controller
         return response()->json([
             'courses' => $courses,
         ]);
+        
     } catch (\Exception $e) {
         return response()->json([
             'message' => 'Failed to retrieve courses.',
@@ -145,8 +145,7 @@ class CourceController extends Controller
         ], 500);
     }
 }
-    public function getCource( $id)
-    {
+    public function getCource( $id) {
         $course = Cource::findOrFail($id);
         return response()->json(['course' => $course]);
     }
