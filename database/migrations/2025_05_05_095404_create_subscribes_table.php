@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subscribes', function (Blueprint $table) {
-            $table->id();
+          $table->id();
             $table->timestamps();
             $table->foreignId('cource_id')->constrained('cources')->onDelete('cascade');
             $table->foreignId('student_id')->constrained('users')->onDelete('cascade');
             $table->decimal('price', 8, 2)->default(0);
+               $table->boolean('accepted')->default(false);
         });
     }
 

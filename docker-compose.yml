@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel-api-app
+    volumes:
+      - .:/var/www
+      - ./php.ini:/usr/local/etc/php/conf.d/custom.ini  
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - laravel
+
+  db:
+    image: mysql:8
+    container_name: laravel-db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - laravel
+
+volumes:
+  dbdata:
+
+networks:
+  laravel:
+    driver: bridge
