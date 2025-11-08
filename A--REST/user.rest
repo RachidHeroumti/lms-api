@@ -6,9 +6,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "name": "std std",
+  "name": "Ahmed student",
   "email": "std@gmail.com",
   "password": "test12345",
+  "phone":"0606060606",
   "role":"student"
   }
 
