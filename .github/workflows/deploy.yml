@@ -1,0 +1,32 @@
+name: Deploy Laravel Docker to VPS
+
+on:
+  push:
+    branches:
+      - main # or your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout your repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Set up SSH
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.1
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      # 3. Deploy: SSH into VPS and pull/build Docker
+      - name: Deploy to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no root@YOUR_VPS_IP "
+            cd /home/test-docker/lms-api &&
+            docker compose down &&
+            docker compose pull &&
+            docker compose up -d --build &&
+            docker compose exec app php artisan migrate
+          "
