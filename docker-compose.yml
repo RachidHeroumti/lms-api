@@ -8,6 +8,7 @@ services:
     container_name: laravel-api-app
     volumes:
       - .:/var/www
+      - vendor:/var/www/vendor        # <-- preserve image vendor in a named volume
       - ./php.ini:/usr/local/etc/php/conf.d/custom.ini  
     ports:
       - "8000:8000"
