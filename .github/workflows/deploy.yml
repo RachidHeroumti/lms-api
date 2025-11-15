@@ -23,7 +23,7 @@ jobs:
       # 3. Deploy: SSH into VPS and pull/build Docker
       - name: Deploy to VPS
         run: |
-          ssh -o StrictHostKeyChecking=no root@YOUR_VPS_IP "
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} "
             cd /home/test-docker/lms-api &&
             docker compose down &&
             docker compose pull &&
