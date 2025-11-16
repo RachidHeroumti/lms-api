@@ -22,12 +22,18 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} "
             cd /home/test-docker/lms-api &&
+
+            # ✅ 1. Pull latest code from GitHub
+            git pull &&
+
+            # ✅ 2. Rebuild and restart containers
             docker compose down &&
-            docker compose pull &&
             docker compose up -d --build &&
 
+            # ✅ 3. Wait for DB to be ready
             echo '⏳ Waiting for MySQL...' &&
-            sleep 12 &&   # Wait for MySQL to start
+            sleep 12 &&
 
+            # ✅ 4. Run migrations
             docker compose exec app php artisan migrate --force
           "
